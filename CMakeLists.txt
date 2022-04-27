@@ -5,7 +5,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(hello_foo)
 
-add_library(${PROJECT_NAME} library.cpp)
+add_library(${PROJECT_NAME} src/library.cpp)
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+        "$<INSTALL_INTERFACE:include>")
 
 set(config_bin "lib/cmake/${PROJECT_NAME}")
 set(generated_dir "${CMAKE_CURRENT_BINARY_DIR}/generated")
@@ -24,10 +28,11 @@ install(
         TARGETS hello_foo
         EXPORT "${TARGETS_EXPORT_NAME}"
         RUNTIME DESTINATION "bin"
+        INCLUDES DESTINATION "include"
 )
 install(
-        FILES "library.h"
-        DESTINATION "."
+        FILES "include/library.h"
+        DESTINATION "include"
 )
 install(
         EXPORT "${TARGETS_EXPORT_NAME}"
