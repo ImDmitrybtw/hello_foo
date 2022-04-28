@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(hello_foo)
 
-add_library(${PROJECT_NAME} src/library.cpp)
+add_library(${PROJECT_NAME} source/library.cpp)
 
 target_include_directories(${PROJECT_NAME} PUBLIC
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
